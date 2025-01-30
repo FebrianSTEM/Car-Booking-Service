@@ -1,8 +1,8 @@
-﻿using hyundai_testDriveBooking_service.Domain.Entities;
+﻿using car_booking_service.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace hyundai_testDriveBooking_service.Infrastructure.Data.Configurations
+namespace car_booking_service.Infrastructure.Data.Configurations
 {
     public class BookingTestDriveConfiguration : IEntityTypeConfiguration<Booking>
     {

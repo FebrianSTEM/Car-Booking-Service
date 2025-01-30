@@ -1,17 +1,16 @@
 ﻿using Bogus;
 using FakeItEasy;
 using Xunit;
-using hyundai_testDriveBooking_service.Domain.Interfaces;
-using hyundai_testDriveBooking_service.Application.Services.Interfaces;
-using hyundai_testDriveBooking_service.Domain.Entities;
-using hyundai_testDriveBooking_service.Application.Services.Implementations;
+using car_booking_service.Domain.Interfaces;
+using car_booking_service.Application.Services.Interfaces;
+using car_booking_service.Domain.Entities;
+using car_booking_service.Application.Services.Implementations;
 using FluentAssertions;
-using hyundai_testDriveBooking_service.Application.Models.Requests.BookingRequests;
-using hyundai_testDriveBooking_service.Domain.Exception;
-using hyundai_testDriveBooking_service.Domain.Constants;
-using Mapster;
+using car_booking_service.Application.Models.Requests.BookingRequests;
+using car_booking_service.Domain.Exception;
+using car_booking_service.Domain.Constants;
 
-namespace hyundai_testDriveBooking_bookingService.Test.Services
+namespace car_booking_service.Test.Services
 {
     public class BookingServiceTests
     {

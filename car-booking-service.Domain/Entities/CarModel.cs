@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static hyundai_testDriveBooking_service.Domain.Constants.ValidationConstants;
+using static car_booking_service.Domain.Constants.ValidationConstants;
 
-namespace hyundai_testDriveBooking_service.Domain.Entities
+namespace car_booking_service.Domain.Entities
 {
     [Table("CarModels", Schema = "Master")]
     public class CarModel

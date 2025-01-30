@@ -1,5 +1,5 @@
-﻿using hyundai_testDriveBooking_service.Domain.Interfaces;
-using hyundai_testDriveBooking_service.Infrastructure.Data.Context;
+﻿using car_booking_service.Domain.Interfaces;
+using car_booking_service.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System;
@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hyundai_testDriveBooking_service.Infrastructure.Repositories
+namespace car_booking_service.Infrastructure.Repositories
 {
     public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {

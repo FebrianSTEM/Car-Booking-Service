@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Globalization;
 
-namespace hyundai_testDriveBooking_service.Configuration
+namespace car_booking_service.Configuration
 {
     public class SnakeCaseQueryValueProvider : QueryStringValueProvider, IValueProvider
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static hyundai_testDriveBooking_service.Domain.Enums.Enums;
+using static car_booking_service.Domain.Enums.Enums;
 
-namespace hyundai_testDriveBooking_service.Domain.Common
+namespace car_booking_service.Domain.Common
 {
     public class StandardResponse<T> : HttpResult
     {

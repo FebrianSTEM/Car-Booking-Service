@@ -1,6 +1,6 @@
-﻿using hyundai_testDriveBooking_service.Domain.Exception;
+﻿using car_booking_service.Domain.Exception;
 
-namespace hyundai_testDriveBooking_service.Middlewares
+namespace car_booking_service.Middlewares
 {
     public class ExceptionHandlingMiddleware
     {

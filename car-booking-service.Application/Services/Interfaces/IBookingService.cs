@@ -1,8 +1,8 @@
-﻿using hyundai_testDriveBooking_service.Application.Models.Requests.BookingRequests;
-using hyundai_testDriveBooking_service.Application.Models.Responses.BookingResponses;
-using hyundai_testDriveBooking_service.Domain.Entities;
+﻿using car_booking_service.Application.Models.Requests.BookingRequests;
+using car_booking_service.Application.Models.Responses.BookingResponses;
+using car_booking_service.Domain.Entities;
 
-namespace hyundai_testDriveBooking_service.Application.Services.Interfaces
+namespace car_booking_service.Application.Services.Interfaces
 {
     public interface IBookingService
     {

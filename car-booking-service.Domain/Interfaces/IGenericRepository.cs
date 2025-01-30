@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hyundai_testDriveBooking_service.Domain.Interfaces
+namespace car_booking_service.Domain.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {

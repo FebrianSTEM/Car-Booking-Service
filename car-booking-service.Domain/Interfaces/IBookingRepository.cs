@@ -1,4 +1,4 @@
-﻿using hyundai_testDriveBooking_service.Domain.Entities;
+﻿using car_booking_service.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hyundai_testDriveBooking_service.Domain.Interfaces
+namespace car_booking_service.Domain.Interfaces
 {
     public interface IBookingRepository : IGenericRepository<Booking>
     {

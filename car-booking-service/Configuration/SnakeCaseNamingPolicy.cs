@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text;
 
-namespace hyundai_testDriveBooking_service.Configuration
+namespace car_booking_service.Configuration
 {
     public class SnakeCaseNamingPolicy : JsonNamingPolicy
     {

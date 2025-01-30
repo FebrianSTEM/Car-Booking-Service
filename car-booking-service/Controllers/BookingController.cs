@@ -1,14 +1,14 @@
-﻿using hyundai_testDriveBooking_service.Application.Models.Requests.BookingRequests;
-using hyundai_testDriveBooking_service.Application.Models.Responses.BookingResponses;
-using hyundai_testDriveBooking_service.Application.Services.Interfaces;
-using hyundai_testDriveBooking_service.Domain.Common;
-using hyundai_testDriveBooking_service.Domain.Constants;
-using hyundai_testDriveBooking_service.Domain.Enums;
-using hyundai_testDriveBooking_service.Domain.Exception;
-using hyundai_testDriveBooking_service;
+﻿using car_booking_service.Application.Models.Requests.BookingRequests;
+using car_booking_service.Application.Models.Responses.BookingResponses;
+using car_booking_service.Application.Services.Interfaces;
+using car_booking_service.Domain.Common;
+using car_booking_service.Domain.Constants;
+using car_booking_service.Domain.Enums;
+using car_booking_service.Domain.Exception;
+using car_booking_service;
 using Microsoft.AspNetCore.Mvc;
 
-namespace hyundai_testDriveBooking_service.Controllers
+namespace car_booking_service.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

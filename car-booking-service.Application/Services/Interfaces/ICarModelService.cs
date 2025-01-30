@@ -1,12 +1,12 @@
-﻿using hyundai_testDriveBooking_service.Application.Models.Requests.CarModelRequests;
-using hyundai_testDriveBooking_service.Application.Models.Responses.CarModelResponses;
+﻿using car_booking_service.Application.Models.Requests.CarModelRequests;
+using car_booking_service.Application.Models.Responses.CarModelResponses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hyundai_testDriveBooking_service.Application.Services.Interfaces
+namespace car_booking_service.Application.Services.Interfaces
 {
     public interface ICarModelService
     {

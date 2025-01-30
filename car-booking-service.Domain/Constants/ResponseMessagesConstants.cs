@@ -1,4 +1,4 @@
-﻿namespace hyundai_testDriveBooking_service.Domain.Constants
+﻿namespace car_booking_service.Domain.Constants
 {
     public static class ResponseMessagesConstants
     {

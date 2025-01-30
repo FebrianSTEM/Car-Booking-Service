@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace hyundai_testDriveBooking_service.Domain.Exception
+namespace car_booking_service.Domain.Exception
 {
     public class HttpStatusCodeException : IOException
     {

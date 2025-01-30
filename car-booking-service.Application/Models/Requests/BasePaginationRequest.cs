@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hyundai_testDriveBooking_service.Application.Models.Requests
+namespace car_booking_service.Application.Models.Requests
 {
     public class BasePaginationRequest
     {

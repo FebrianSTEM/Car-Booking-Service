@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>hyundai_testDriveBooking_service.Application</RootNamespace>
+    <RootNamespace>car_booking_service.Application</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\hyundai-testDriveBooking-service.Domain\hyundai-testDriveBooking-service.Domain.csproj" />
+    <ProjectReference Include="..\car-booking-service.Domain\car-booking-service.Domain.csproj" />
   </ItemGroup>
 
 </Project>

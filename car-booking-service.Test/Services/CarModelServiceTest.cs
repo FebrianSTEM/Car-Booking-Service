@@ -2,13 +2,13 @@
 using Castle.Core.Logging;
 using FakeItEasy;
 using FluentAssertions;
-using hyundai_testDriveBooking_service.Application.Models.Requests.CarModelRequests;
-using hyundai_testDriveBooking_service.Application.Models.Responses.CarModelResponses;
-using hyundai_testDriveBooking_service.Application.Services.Implementations;
-using hyundai_testDriveBooking_service.Application.Services.Interfaces;
-using hyundai_testDriveBooking_service.Domain.Entities;
-using hyundai_testDriveBooking_service.Domain.Exception;
-using hyundai_testDriveBooking_service.Domain.Interfaces;
+using car_booking_service.Application.Models.Requests.CarModelRequests;
+using car_booking_service.Application.Models.Responses.CarModelResponses;
+using car_booking_service.Application.Services.Implementations;
+using car_booking_service.Application.Services.Interfaces;
+using car_booking_service.Domain.Entities;
+using car_booking_service.Domain.Exception;
+using car_booking_service.Domain.Interfaces;
 using Mapster;
 using Xunit;
 

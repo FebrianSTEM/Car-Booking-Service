@@ -1,4 +1,4 @@
-﻿namespace hyundai_testDriveBooking_service.Application.Models.Responses.CarModelResponses
+﻿namespace car_booking_service.Application.Models.Responses.CarModelResponses
 {
     public class CarModelResponse
     {

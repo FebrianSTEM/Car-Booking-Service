@@ -1,9 +1,9 @@
-﻿using hyundai_testDriveBooking_service.Domain.Entities;
-using hyundai_testDriveBooking_service.Infrastructure.Data.Configurations;
+﻿using car_booking_service.Domain.Entities;
+using car_booking_service.Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace hyundai_testDriveBooking_service.Infrastructure.Data.Context
+namespace car_booking_service.Infrastructure.Data.Context
 {
     public class ApplicationDbContext : DbContext
     {

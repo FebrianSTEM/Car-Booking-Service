@@ -1,6 +1,6 @@
-﻿using hyundai_testDriveBooking_service.Domain.Entities;
+﻿using car_booking_service.Domain.Entities;
 
-namespace hyundai_testDriveBooking_service.Domain.Interfaces
+namespace car_booking_service.Domain.Interfaces
 {
     public interface ICarModelRepository : IGenericRepository<CarModel>
     {

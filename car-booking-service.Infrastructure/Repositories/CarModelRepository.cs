@@ -1,9 +1,9 @@
-﻿using hyundai_testDriveBooking_service.Domain.Entities;
-using hyundai_testDriveBooking_service.Domain.Interfaces;
-using hyundai_testDriveBooking_service.Infrastructure.Data.Context;
+﻿using car_booking_service.Domain.Entities;
+using car_booking_service.Domain.Interfaces;
+using car_booking_service.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace hyundai_testDriveBooking_service.Infrastructure.Repositories
+namespace car_booking_service.Infrastructure.Repositories
 {
     public class CarModelRepository : GenericRepository<CarModel>, ICarModelRepository
     {

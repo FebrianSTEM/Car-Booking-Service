@@ -1,15 +1,15 @@
-using hyundai_testDriveBooking_service.Application.Services.Implementations;
-using hyundai_testDriveBooking_service.Application.Services.Interfaces;
-using hyundai_testDriveBooking_service.Domain.Entities;
-using hyundai_testDriveBooking_service.Domain.Interfaces;
-using hyundai_testDriveBooking_service.Infrastructure.Data.Context;
-using hyundai_testDriveBooking_service.Infrastructure.Repositories;
-using hyundai_testDriveBooking_service.Middlewares;
+using car_booking_service.Application.Services.Implementations;
+using car_booking_service.Application.Services.Interfaces;
+using car_booking_service.Domain.Entities;
+using car_booking_service.Domain.Interfaces;
+using car_booking_service.Infrastructure.Data.Context;
+using car_booking_service.Infrastructure.Repositories;
+using car_booking_service.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Serilog;
 using System.Text.Json.Serialization;
-using hyundai_testDriveBooking_service.Configuration;
+using car_booking_service.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 

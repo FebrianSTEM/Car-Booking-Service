@@ -1,4 +1,4 @@
-﻿namespace hyundai_testDriveBooking_service.Domain.Enums
+﻿namespace car_booking_service.Domain.Enums
 {
     public class Enums
     {
