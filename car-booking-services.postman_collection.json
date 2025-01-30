@@ -1,0 +1,1721 @@
+{
+	"info": {
+		"_postman_id": "8b906ba2-4a47-449d-8d46-bf309b2eaa5e",
+		"name": "Hyundai",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6386755"
+	},
+	"item": [
+		{
+			"name": "CarModel",
+			"item": [
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7125/api/CarModels/:car_id",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"CarModels",
+								":car_id"
+							],
+							"variable": [
+								{
+									"key": "car_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Id Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/CarModels/:car_id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"CarModels",
+										":car_id"
+									],
+									"variable": [
+										{
+											"key": "car_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:15:35 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Error\",\n    \"code\": 404,\n    \"data\": null,\n    \"message\": \"Failed Retrieved Data Car Model with id 1 : Car model with ID 1 not found\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/CarModels/:car_id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"CarModels",
+										":car_id"
+									],
+									"variable": [
+										{
+											"key": "car_id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:29:02 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 200,\n    \"data\": {\n        \"car_id\": 2,\n        \"brand\": \"Hyundai\",\n        \"model\": \"Stargazer\",\n        \"year\": 2024,\n        \"image_url\": \"test\",\n        \"description\": \"test\",\n        \"is_available_for_test_drive\": false,\n        \"created_by\": \"System\",\n        \"created_at\": \"2025-01-16T21:17:57.7084546Z\",\n        \"updated_by\": \"System\",\n        \"updated_at\": \"2025-01-16T21:17:57.7084546Z\"\n    },\n    \"message\": \"Succesfuly Retrieved Data Car Model with id 2\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7125/api/CarModels",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"CarModels"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "No Data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/CarModels",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"CarModels"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:13:47 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 200,\n    \"data\": [],\n    \"message\": \"Succesfuly Retrieved Data Car Models with total 0\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/CarModels",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"CarModels"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:28:35 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 200,\n    \"data\": [\n        {\n            \"car_id\": 2,\n            \"brand\": \"Hyundai\",\n            \"model\": \"Stargazer\",\n            \"year\": 2024,\n            \"image_url\": \"test\",\n            \"description\": \"test\",\n            \"is_available_for_test_drive\": false,\n            \"created_by\": \"System\",\n            \"created_at\": \"2025-01-16T21:17:57.7084546Z\",\n            \"updated_by\": \"System\",\n            \"updated_at\": \"2025-01-16T21:17:57.7084546Z\"\n        }\n    ],\n    \"message\": \"Succesfuly Retrieved Data Car Models with total 1\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7125/api/CarModels/list",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"CarModels",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/CarModels/list",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"CarModels",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:19:53 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 200,\n    \"data\": [\n        {\n            \"car_id\": 1,\n            \"brand\": \"Hyundai\",\n            \"model\": \"Stargazer\",\n            \"year\": 2024,\n            \"image_url\": \"test\",\n            \"description\": \"test\",\n            \"is_available_for_test_drive\": false,\n            \"created_by\": \"System\",\n            \"created_at\": \"2025-01-16T21:17:01.4484429Z\",\n            \"updated_by\": \"System\",\n            \"updated_at\": \"2025-01-16T21:17:01.4484429Z\"\n        },\n        {\n            \"car_id\": 2,\n            \"brand\": \"Hyundai\",\n            \"model\": \"Stargazer\",\n            \"year\": 2024,\n            \"image_url\": \"test\",\n            \"description\": \"test\",\n            \"is_available_for_test_drive\": false,\n            \"created_by\": \"System\",\n            \"created_at\": \"2025-01-16T21:17:57.7084546Z\",\n            \"updated_by\": \"System\",\n            \"updated_at\": \"2025-01-16T21:17:57.7084546Z\"\n        }\n    ],\n    \"message\": \"Succesfuly Retrieved Data Car Models with total 2\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Car Model",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"brand\": \"Hyundai\",\n  \"model\": \"Stargazer\",\n  \"year\": 2024,\n  \"image_url\": \"test\",\n  \"description\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7125/api/CarModels",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"CarModels"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Succesfuly Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"brand\": \"Hyundai\",\n  \"model\": \"Stargazer\",\n  \"year\": 2024,\n  \"image_url\": \"test\",\n  \"description\": \"test\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7125/api/CarModels",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"CarModels"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:17:57 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 201,\n    \"data\": {\n        \"car_id\": 2,\n        \"brand\": \"Hyundai\",\n        \"model\": \"Stargazer\",\n        \"year\": 2024,\n        \"image_url\": \"test\",\n        \"description\": \"test\",\n        \"is_available_for_test_drive\": false,\n        \"created_by\": \"System\",\n        \"created_at\": \"2025-01-16T21:17:57.7084546Z\",\n        \"updated_by\": \"System\",\n        \"updated_at\": \"2025-01-16T21:17:57.7084546Z\"\n    },\n    \"message\": \"Succesfuly Create Car Model Stargazer\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Car Model",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"car_id\": 3,\n  \"brand\": \"Updated Brand\",\n  \"model\": \"Update model\",\n  \"year\": 2002,\n  \"image_url\": \"test\",\n  \"description\": \"test\",\n  \"is_available_for_test_drive\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7125/api/CarModels",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"CarModels"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"car_id\": 1,\n  \"brand\": \"Updated Brand\",\n  \"model\": \"Update model\",\n  \"year\": 2002,\n  \"image_url\": \"test\",\n  \"description\": \"test\",\n  \"is_available_for_test_drive\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7125/api/CarModels",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"CarModels"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:21:56 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 200,\n    \"data\": {\n        \"car_id\": 1,\n        \"brand\": \"Updated Brand\",\n        \"model\": \"Update model\",\n        \"year\": 2002,\n        \"image_url\": \"test\",\n        \"description\": \"test\",\n        \"is_available_for_test_drive\": true,\n        \"created_by\": \"System\",\n        \"created_at\": \"2025-01-16T21:17:01.4484429Z\",\n        \"updated_by\": \"System\",\n        \"updated_at\": \"2025-01-16T21:21:56.7480778Z\"\n    },\n    \"message\": \"Succesfuly Update Car Model Data with id 1\"\n}"
+						},
+						{
+							"name": "Failed Update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"car_id\": 3,\n  \"brand\": \"Updated Brand\",\n  \"model\": \"Update model\",\n  \"year\": 2002,\n  \"image_url\": \"test\",\n  \"description\": \"test\",\n  \"is_available_for_test_drive\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7125/api/CarModels",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"CarModels"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:24:33 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Error\",\n    \"code\": 404,\n    \"data\": null,\n    \"message\": \"Failed Update Car Model Data: Car model with ID 3 not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Car Model",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7125/api/CarModels/:car_id",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"CarModels",
+								":car_id"
+							],
+							"variable": [
+								{
+									"key": "car_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Failed Delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/CarModels/:car_id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"CarModels",
+										":car_id"
+									],
+									"variable": [
+										{
+											"key": "car_id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:25:43 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Error\",\n    \"code\": 404,\n    \"data\": null,\n    \"message\": \"Failed Delete Car Model Data with id : 3\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/CarModels/:car_id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"CarModels",
+										":car_id"
+									],
+									"variable": [
+										{
+											"key": "car_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:26:07 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "Get Booking By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7125/api/Booking/:booking_id",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"Booking",
+								":booking_id"
+							],
+							"variable": [
+								{
+									"key": "booking_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "No Data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/Booking/:booking_id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking",
+										":booking_id"
+									],
+									"variable": [
+										{
+											"key": "booking_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:44:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Error\",\n    \"code\": 404,\n    \"data\": null,\n    \"message\": \"Failed Retrieved Data booking with booking id 1: Booking with ID 1 not found\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/Booking/:booking_id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking",
+										":booking_id"
+									],
+									"variable": [
+										{
+											"key": "booking_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:47:54 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 200,\n    \"data\": {\n        \"booking_id\": 1,\n        \"car_id\": 2,\n        \"car_model_brand\": \"Hyundai\",\n        \"car_model_name\": \"Stargazer\",\n        \"car_model_year\": 2024,\n        \"booking_date_time\": \"2025-01-16T21:32:15.112Z\",\n        \"customer_name\": \"Santoso\",\n        \"customer_email\": \"user@example.com\",\n        \"customer_phone\": \"085752082822\",\n        \"created_by\": \"System\",\n        \"created_at\": \"2025-01-16T21:45:44.6090945Z\",\n        \"updated_by\": \"System\",\n        \"updated_at\": \"2025-01-16T21:45:44.6090945Z\"\n    },\n    \"message\": \"Succesfuly Retrieved Data booking with booking id 1\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Booking",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/Booking",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:34:29 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 200,\n    \"data\": [\n        {\n            \"booking_id\": 1,\n            \"car_id\": 2,\n            \"car_model_brand\": \"Hyundai\",\n            \"car_model_name\": \"Stargazer\",\n            \"car_model_year\": 2024,\n            \"booking_date_time\": \"2025-01-16T21:31:21.295Z\",\n            \"customer_name\": \"santoso\",\n            \"customer_email\": \"user@example.com\",\n            \"customer_phone\": \"085752082822\",\n            \"created_by\": \"System\",\n            \"created_at\": \"0001-01-01T00:00:00\",\n            \"updated_by\": \"System\",\n            \"updated_at\": \"0001-01-01T00:00:00\"\n        }\n    ],\n    \"message\": \"Succesfuly Retrieved Data Booking with total 1\"\n}"
+						},
+						{
+							"name": "Success but no data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/Booking",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:45:12 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 200,\n    \"data\": [],\n    \"message\": \"Succesfuly Retrieved Data Booking with total 0\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Booking List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7125/api/Booking/list?start_date=2025-01-17&end_date=2025-01-17",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"Booking",
+								"list"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2025-01-17"
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-17"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success No Data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/Booking/list?start_date=2025-01-17&end_date=2025-01-17",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking",
+										"list"
+									],
+									"query": [
+										{
+											"key": "start_date",
+											"value": "2025-01-17"
+										},
+										{
+											"key": "end_date",
+											"value": "2025-01-17"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:35:46 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 200,\n    \"data\": [],\n    \"message\": \"Succesfuly Retrieved Data booking list with total 0\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/Booking/list?start_date=2025-01-16&end_date=2025-01-17",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking",
+										"list"
+									],
+									"query": [
+										{
+											"key": "start_date",
+											"value": "2025-01-16"
+										},
+										{
+											"key": "end_date",
+											"value": "2025-01-17"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:47:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 200,\n    \"data\": [\n        {\n            \"booking_id\": 1,\n            \"car_id\": 2,\n            \"car_model_brand\": \"\",\n            \"car_model_name\": \"\",\n            \"car_model_year\": 0,\n            \"booking_date_time\": \"2025-01-16T21:32:15.112Z\",\n            \"customer_name\": \"Santoso\",\n            \"customer_email\": \"user@example.com\",\n            \"customer_phone\": \"085752082822\",\n            \"created_by\": \"System\",\n            \"created_at\": \"2025-01-16T21:45:44.6090945Z\",\n            \"updated_by\": \"System\",\n            \"updated_at\": \"2025-01-16T21:45:44.6090945Z\"\n        },\n        {\n            \"booking_id\": 2,\n            \"car_id\": 1,\n            \"car_model_brand\": \"\",\n            \"car_model_name\": \"\",\n            \"car_model_year\": 0,\n            \"booking_date_time\": \"2025-01-16T21:32:15.112Z\",\n            \"customer_name\": \"Santoso\",\n            \"customer_email\": \"user@example.com\",\n            \"customer_phone\": \"085752082822\",\n            \"created_by\": \"System\",\n            \"created_at\": \"2025-01-16T21:45:52.2589413Z\",\n            \"updated_by\": \"System\",\n            \"updated_at\": \"2025-01-16T21:45:52.2589413Z\"\n        }\n    ],\n    \"message\": \"Succesfuly Retrieved Data booking list with total 2\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Booking",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Sucess",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"car_id\": 1,\n  \"customer_name\": \"Santoso\",\n  \"customer_phone\": \"085752082822\",\n  \"customer_email\": \"user@example.com\",\n  \"booking_date_time\": \"2025-01-16T21:32:15.112Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7125/api/Booking",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:45:52 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 201,\n    \"data\": {\n        \"booking_id\": 2,\n        \"car_id\": 1,\n        \"car_model_brand\": \"Hyundai\",\n        \"car_model_name\": \"Creta\",\n        \"car_model_year\": 2024,\n        \"booking_date_time\": \"2025-01-16T21:32:15.112Z\",\n        \"customer_name\": \"Santoso\",\n        \"customer_email\": \"user@example.com\",\n        \"customer_phone\": \"085752082822\",\n        \"created_by\": \"System\",\n        \"created_at\": \"2025-01-16T21:45:52.2589413Z\",\n        \"updated_by\": \"System\",\n        \"updated_at\": \"2025-01-16T21:45:52.2589413Z\"\n    },\n    \"message\": \"Succesfuly Create booking for Santoso with booking id 2\"\n}"
+						},
+						{
+							"name": "Car Already Booked",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"car_id\": 2,\n  \"customer_name\": \"Santoso\",\n  \"customer_phone\": \"085752082822\",\n  \"customer_email\": \"user@example.com\",\n  \"booking_date_time\": \"2025-01-16T21:32:15.112Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7125/api/Booking",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:33:18 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Error\",\n    \"code\": 422,\n    \"data\": null,\n    \"message\": \"Failed Create booking for Santoso : There's Already Existing Booking for Selected Time.\"\n}"
+						},
+						{
+							"name": "Car Model Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"car_id\": 3,\n  \"customer_name\": \"Santoso\",\n  \"customer_phone\": \"085752082822\",\n  \"customer_email\": \"user@example.com\",\n  \"booking_date_time\": \"2025-01-16T21:32:15.112Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7125/api/Booking",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:59:33 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Error\",\n    \"code\": 422,\n    \"data\": null,\n    \"message\": \"Failed Create booking for Santoso : Selected Car Model with ID 3 not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Booking",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"booking_id\": 5,\n  \"car_model_id\": 4,\n  \"customer_name\": \"Sutomo\",\n  \"customer_phone\": \"085752082822\",\n  \"customer_email\": \"user@example.com\",\n  \"booking_date_time\": \"2025-01-17T21:49:25.022Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7125/api/Booking",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"Booking"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"booking_id\": 1,\n  \"car_model_id\": 2,\n  \"customer_name\": \"Sutomo\",\n  \"customer_phone\": \"085752082822\",\n  \"customer_email\": \"user@example.com\",\n  \"booking_date_time\": \"2025-01-17T21:49:25.022Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7125/api/Booking",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:50:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"code\": 200,\n    \"data\": null,\n    \"message\": \"Succesfuly Update booking with booking id 1\"\n}"
+						},
+						{
+							"name": "Booking id not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"booking_id\": 5,\n  \"car_model_id\": 4,\n  \"customer_name\": \"Sutomo\",\n  \"customer_phone\": \"085752082822\",\n  \"customer_email\": \"user@example.com\",\n  \"booking_date_time\": \"2025-01-17T21:49:25.022Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7125/api/Booking",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 21:50:51 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Error\",\n    \"code\": 422,\n    \"data\": null,\n    \"message\": \"Failed Update booking with booking id 5 : Booking not found for booking id 5\"\n}"
+						},
+						{
+							"name": "Car Id Not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"booking_id\": 1,\n  \"car_id\": 4,\n  \"customer_name\": \"Sutomo\",\n  \"customer_phone\": \"085752082822\",\n  \"customer_email\": \"user@example.com\",\n  \"booking_date_time\": \"2025-01-17T21:49:25.022Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7125/api/Booking",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 22:02:17 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Error\",\n    \"code\": 422,\n    \"data\": null,\n    \"message\": \"Failed Update booking with booking id 1 : Selected Car Model with ID 4 not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Booking",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7125/api/Booking/:booking_id",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"Booking",
+								":booking_id"
+							],
+							"variable": [
+								{
+									"key": "booking_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Booking Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/Booking/:booking_id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking",
+										":booking_id"
+									],
+									"variable": [
+										{
+											"key": "booking_id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 22:51:11 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Error\",\n    \"code\": 422,\n    \"data\": null,\n    \"message\": \"Failed Delete booking with booking id 3 : Booking not found for booking id 3\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:7125/api/Booking/:booking_id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7125",
+									"path": [
+										"api",
+										"Booking",
+										":booking_id"
+									],
+									"variable": [
+										{
+											"key": "booking_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Jan 2025 22:51:37 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:7109"
+		}
+	]
+}
