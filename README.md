@@ -1,3 +1,6 @@
+This Car Booking Service uses an in-memory Entity Framework Core database for testing purposes. 
+The database seeding and schema will be provided immediately.
+
 # Setup
 To Setup the project you can read [SETUP.md](https://github.com/FebrianSTEM/Car-Booking-Service/blob/dev/SETUP.md).
 
