@@ -32,7 +32,7 @@ builder.Services.AddSwaggerGen(swaggerOpt =>
 
 //Configure Connection to Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseInMemoryDatabase("HyundaiTestDriveBookingDb")
+    options.UseInMemoryDatabase("CarTestDriveBookingDb")
            .ConfigureWarnings(warnings => warnings.Ignore(InMemoryEventId.TransactionIgnoredWarning))); //Ignore transaction
 
 //Setup Logger
