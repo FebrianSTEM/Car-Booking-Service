@@ -58,7 +58,7 @@ Before running the .NET 8 project, ensure you have the following installed on yo
 #### From Visual Studio 2022
 1. Open the project in **Visual Studio 2022**.
 2. Set startup project:
-   - Right-click on the **hyundai-testDriveBooking-service** project in the **Solution Explorer** and select **Set as Startup Project**.
+   - Right-click on the **car-booking-service** project in the **Solution Explorer** and select **Set as Startup Project**.
 3. Run the project:
    - Click the green **Start** button or press `F5` to run the application in Debug mode.
    - Alternatively, press `Ctrl + F5` to run the application without debugging.
@@ -67,7 +67,7 @@ Before running the .NET 8 project, ensure you have the following installed on yo
 #### From the Command Line
 - Run the project in development mode:
   ```bash
-  dotnet run --project hyundai-testDriveBooking-service
+  dotnet run --project car-booking-service
   ```
 
 ### 6. Access the Application
