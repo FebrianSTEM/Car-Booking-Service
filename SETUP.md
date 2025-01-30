@@ -76,6 +76,6 @@ URL http://localhost:5276/swagger or https://localhost:7125/swagger
 ---
 
 ### 7. Logging
-- To access logging data you could access it in hyundai-testDriveBooking-service\hyundai-testDriveBooking-service\Logs
+- To access logging data you could access it in car-booking-service\Logs
 
 ---
