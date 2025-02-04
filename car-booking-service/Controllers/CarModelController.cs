@@ -3,12 +3,9 @@ using car_booking_service.Application.Models.Responses.CarModelResponses;
 using car_booking_service.Application.Services.Interfaces;
 using car_booking_service.Domain.Common;
 using car_booking_service.Domain.Constants;
-using car_booking_service.Domain.Entities;
 using car_booking_service.Domain.Enums;
 using car_booking_service.Domain.Exception;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.Serialization;
-using static car_booking_service.Domain.Enums.Enums;
 
 namespace car_booking_service.Controllers
 {
