@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace car_booking_service.Domain.Entities
 {
     [Table("TestDrive", Schema = "BookingTrx")]
-    public class Booking
+    public class Booking : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -21,10 +21,6 @@ namespace car_booking_service.Domain.Entities
         public string CustomerName { get; set; } = string.Empty;
         public string CustomerEmail { get; set; } = string.Empty;
         public string CustomerPhone { get; set; } = string.Empty;
-        public string CreatedBy { get; set; } = SYSTEM_USER;
-        public DateTime CreatedAt { get; set; }
-        public string UpdatedBy { get; set; } = SYSTEM_USER;
-        public DateTime UpdatedAt { get; set; }
 
         [JsonIgnore]
         [NotMapped]
