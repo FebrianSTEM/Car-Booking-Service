@@ -20,5 +20,9 @@ namespace car_booking_service.Domain.Entities
         public string CreatedBy { get; set; } = SYSTEM_USER;
         public DateTime UpdatedAt { get; set; }
         public string UpdatedBy { get; set;} = SYSTEM_USER;
+
+
+        // Navigation Property
+        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
     }
 }

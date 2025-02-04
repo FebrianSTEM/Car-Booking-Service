@@ -191,7 +191,7 @@ namespace car_booking_service.Controllers
             }
             catch (HttpStatusCodeException ex)
             {
-                message = $"{ResponseMessagesConstants.FAILED_CREATE_MESSAGE_TEMPLATE} Car Model {request.Model}";
+                message = $"{ResponseMessagesConstants.FAILED_CREATE_MESSAGE_TEMPLATE} Car Model {request.Model}, {ex.Message}";
                 HttpResults = new StandardResponse<CarModelResponse>((Enums.StatusCode)ex.StatusCode, Enums.StatusMessage.Error, null, message);
                 _logger.LogError(ex, message);
 
@@ -199,7 +199,7 @@ namespace car_booking_service.Controllers
             }
             catch (Exception ex)
             {
-                message = $"{ResponseMessagesConstants.FAILED_CREATE_MESSAGE_TEMPLATE} Car Model {request.Model}";
+                message = $"{ResponseMessagesConstants.FAILED_CREATE_MESSAGE_TEMPLATE} Car Model {request.Model}, {ex.Message}";
                 HttpResults = new StandardResponse<CarModelResponse>(Enums.StatusCode.InternalServerErrorException, Enums.StatusMessage.Error, null, message);
                 _logger.LogError(ex, message);
                 
@@ -265,7 +265,7 @@ namespace car_booking_service.Controllers
             }
             catch (HttpStatusCodeException ex)
             {
-                message = $"{ResponseMessagesConstants.FAILED_DELETE_MESSAGE_TEMPLATE} Car Model Data with id : {carId}";
+                message = $"{ResponseMessagesConstants.FAILED_DELETE_MESSAGE_TEMPLATE} Car Model Data with id : {carId}, {ex.Message}";
                 HttpResults = new StandardResponse<CarModelResponse>((Enums.StatusCode)ex.StatusCode, Enums.StatusMessage.Error, null, message);
                 _logger.LogError(ex, message);
 
@@ -273,7 +273,7 @@ namespace car_booking_service.Controllers
             }
             catch (Exception ex)
             {
-                message = $"{ResponseMessagesConstants.FAILED_DELETE_MESSAGE_TEMPLATE} Car Model Data with id : {carId}";
+                message = $"{ResponseMessagesConstants.FAILED_DELETE_MESSAGE_TEMPLATE} Car Model Data with id : {carId}, {ex.Message}";
                 HttpResults = new StandardResponse<CarModelResponse>(Enums.StatusCode.InternalServerErrorException, Enums.StatusMessage.Error, null, message);
                 _logger.LogError(ex, message);
 

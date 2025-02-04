@@ -11,7 +11,12 @@ namespace car_booking_service.Domain.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BookingId { get; set; }
+        [ForeignKey(nameof(CarModel))]
         public int CarId { get; set; }
+
+        // Navigation Property
+        public virtual CarModel CarModel { get; set; }
+
         public DateTime BookingDateTime { get; set; }
         public string CustomerName { get; set; } = string.Empty;
         public string CustomerEmail { get; set; } = string.Empty;

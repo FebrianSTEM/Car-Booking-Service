@@ -11,8 +11,13 @@ namespace car_booking_service.Infrastructure.Data.Configurations
             builder.HasKey(x => x.BookingId);
             builder.Property(x => x.BookingId).ValueGeneratedOnAdd(); // Auto Increment
 
+            builder.HasOne(b => b.CarModel)
+                   .WithMany(c => c.Bookings)
+                   .HasForeignKey(b => b.CarId)
+                   .OnDelete(DeleteBehavior.Restrict);
             builder.Property(x => x.CarId)
                    .IsRequired();
+           
 
             builder.Property(x => x.CustomerName)
                    .IsRequired()
