@@ -12,12 +12,12 @@ namespace car_booking_service.Application.Services.Interfaces
         Task<IEnumerable<BookingResponse>> GetAllBookingAsync();
         Task DeleteBookingAsync(int id);
         Task<List<BookingResponse>> GetListAsync(GetBookingListRequest request);
-        Task<bool> ValidateBookingSlotTime(CreateBookingRequest request);
+        Task ValidateBookingSlotTime(CreateBookingRequest request);
         Task ValidateRequestUpdateBooking(UpdateBookingRequest request);
-        Task<(bool, Booking)> ValidateBooking(int bookingId);
-        Task<(bool, Booking)> ValidateDeleteBookingRequest(int bookingId);
-        Task<(bool, CarModel)> ValidateCarModel(int carId);
-        Task<(bool, CarModel)> ValidateRequestCreateBookingAsync(CreateBookingRequest request);
+        Task<Booking> ValidateBooking(int bookingId);
+        Task<Booking> ValidateDeleteBookingRequest(int bookingId);
+        Task<CarModel> ValidateCarModel(int carId);
+        Task<CarModel> ValidateRequestCreateBookingAsync(CreateBookingRequest request);
         Task<(List<BookingResponse>, int)> GetPaginatedAsync(GetPaginatedBookingsRequest request);
     }
 }

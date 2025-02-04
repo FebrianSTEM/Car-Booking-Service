@@ -5,7 +5,6 @@ using car_booking_service.Domain.Common;
 using car_booking_service.Domain.Constants;
 using car_booking_service.Domain.Enums;
 using car_booking_service.Domain.Exception;
-using car_booking_service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace car_booking_service.Controllers
