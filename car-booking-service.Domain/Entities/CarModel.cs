@@ -5,7 +5,7 @@ using static car_booking_service.Domain.Constants.ValidationConstants;
 namespace car_booking_service.Domain.Entities
 {
     [Table("CarModels", Schema = "Master")]
-    public class CarModel
+    public class CarModel : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -16,11 +16,6 @@ namespace car_booking_service.Domain.Entities
         public string ImageUrl { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public bool IsAvailableForTestDrive { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public string CreatedBy { get; set; } = SYSTEM_USER;
-        public DateTime UpdatedAt { get; set; }
-        public string UpdatedBy { get; set;} = SYSTEM_USER;
-
 
         // Navigation Property
         public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
