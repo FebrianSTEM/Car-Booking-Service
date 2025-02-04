@@ -24,29 +24,7 @@ namespace car_booking_service.Application.Services.Implementations
         public async Task<IEnumerable<BookingResponse>> GetAllBookingAsync()
         {
             IEnumerable<Booking> bookings = await _bookingRepository.GetAllAsync();
-            List<int> carIds = bookings.Select(x => x.CarId).Distinct().ToList();
-            var carModels = await _carModelRepository.GetListByIdsAsync(carIds);
-
-            var result = bookings.Join(carModels, booking => booking.CarId,
-                                                  carModel => carModel.CarId,
-                                                  (booking, carModel) => new BookingResponse()
-                                                  {
-                                                      BookingId = booking.BookingId,
-                                                      CarId = booking.CarId,
-                                                      CarModelBrand = carModel.Brand,
-                                                      CarModelName = carModel.Model,
-                                                      CarModelYear = carModel.Year,
-                                                      BookingDateTime = booking.BookingDateTime,
-                                                      CustomerName = booking.CustomerName,
-                                                      CustomerEmail = booking.CustomerEmail,
-                                                      CustomerPhone = booking.CustomerPhone,
-                                                      CreatedAt = booking.CreatedAt,
-                                                      CreatedBy = booking.CreatedBy,
-                                                      UpdatedAt = booking.UpdatedAt,
-                                                      UpdatedBy = booking.UpdatedBy
-                                                  });
-
-            return result;
+            return bookings.Adapt<IEnumerable<BookingResponse>>();
         }
 
         public async Task<BookingResponse> GetBookingByIdAsync(int id)

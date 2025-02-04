@@ -11,6 +11,33 @@ namespace car_booking_service.Infrastructure.Repositories
         {
         }
 
+
+        public override async Task<IEnumerable<Booking>> GetAllAsync()
+        {
+            return await _context.Bookings.AsNoTracking()
+                                          .Join(
+                                            _context.CarModels.AsNoTracking(),
+                                            booking => booking.CarId,
+                                            carModel => carModel.CarId,
+                                            (booking, carModel) => new Booking
+                                            {
+                                                BookingId = booking.BookingId,
+                                                CarId = carModel.CarId,
+                                                CarModelBrand = carModel.Brand,
+                                                CarModelName = carModel.Model,
+                                                CarModelYear = carModel.Year,
+                                                BookingDateTime = booking.BookingDateTime,
+                                                CustomerName = booking.CustomerName,
+                                                CustomerPhone = booking.CustomerPhone,
+                                                CustomerEmail = booking.CustomerEmail,
+                                                CreatedAt = booking.CreatedAt,
+                                                CreatedBy = booking.CreatedBy,
+                                                UpdatedBy = booking.UpdatedBy,
+                                                UpdatedAt = booking.UpdatedAt
+                                           }).ToListAsync();
+
+        }
+
         public async Task<List<Booking>> GetListAsync(DateTime startDate, 
                                                       DateTime endDate,
                                                       int? carId,
@@ -22,28 +49,28 @@ namespace car_booking_service.Infrastructure.Repositories
                                                       int? carYear = 0)
         {
             var bookingQuery = _context.Bookings.AsNoTracking()
-                                            .Where(x => x.BookingDateTime >= startDate &&
-                                                        x.BookingDateTime <= endDate)
-                                            .Join(
-                                                _context.CarModels.AsNoTracking(),
-                                                booking => booking.CarId,
-                                                carModel => carModel.CarId,
-                                                (booking, carModel) => new Booking
-                                                {
-                                                    BookingId = booking.BookingId,
-                                                    CarId = carModel.CarId,
-                                                    CarModelBrand = carModel.Brand,
-                                                    CarModelName = carModel.Model,
-                                                    CarModelYear = carModel.Year,
-                                                    BookingDateTime = booking.BookingDateTime,
-                                                    CustomerName = booking.CustomerName,
-                                                    CustomerPhone = booking.CustomerPhone,
-                                                    CustomerEmail = booking.CustomerEmail,
-                                                    CreatedAt = booking.CreatedAt,
-                                                    CreatedBy = booking.CreatedBy,
-                                                    UpdatedBy = booking.UpdatedBy,
-                                                    UpdatedAt = booking.UpdatedAt
-                                                });
+                                                .Where(x => x.BookingDateTime >= startDate &&
+                                                            x.BookingDateTime <= endDate)
+                                                .Join(
+                                                    _context.CarModels.AsNoTracking(),
+                                                    booking => booking.CarId,
+                                                    carModel => carModel.CarId,
+                                                    (booking, carModel) => new Booking
+                                                    {
+                                                        BookingId = booking.BookingId,
+                                                        CarId = carModel.CarId,
+                                                        CarModelBrand = carModel.Brand,
+                                                        CarModelName = carModel.Model,
+                                                        CarModelYear = carModel.Year,
+                                                        BookingDateTime = booking.BookingDateTime,
+                                                        CustomerName = booking.CustomerName,
+                                                        CustomerPhone = booking.CustomerPhone,
+                                                        CustomerEmail = booking.CustomerEmail,
+                                                        CreatedAt = booking.CreatedAt,
+                                                        CreatedBy = booking.CreatedBy,
+                                                        UpdatedBy = booking.UpdatedBy,
+                                                        UpdatedAt = booking.UpdatedAt
+                                                    });
 
             if(carId.GetValueOrDefault(0) != 0)
                 bookingQuery = bookingQuery.Where(x => x.CarId == carId);
