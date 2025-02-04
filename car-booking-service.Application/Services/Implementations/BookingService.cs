@@ -103,9 +103,7 @@ namespace car_booking_service.Application.Services.Implementations
 
         public async Task<BookingResponse> CreateBookingAsync(CreateBookingRequest request)
         {
-            (bool isValidated, CarModel carModel) = await ValidateRequestCreateBookingAsync(request);
-            if (!isValidated)
-                throw new HttpStatusCodeException((int)StatusCode.UnprocessableEntity, $"Car model not found or selected time already booked.");
+            CarModel carModel = await ValidateRequestCreateBookingAsync(request);
             Booking bookingEntity = request.Adapt<Booking>();
             DateTime currentTime = DateTime.UtcNow;
             bookingEntity.CreatedAt = currentTime;
@@ -127,7 +125,7 @@ namespace car_booking_service.Application.Services.Implementations
                 ?? throw new HttpStatusCodeException((int)StatusCode.UnprocessableEntity,
                     $"Booking not found for booking id {request.BookingId}");
 
-            (bool isValid, CarModel carModel) = await ValidateCarModel(request.CarId);
+            CarModel carModel = await ValidateCarModel(request.CarId);
 
             if (request.CarId != booking.CarId || request.BookingDateTime != booking.BookingDateTime)
             {
@@ -147,33 +145,26 @@ namespace car_booking_service.Application.Services.Implementations
 
         public async Task DeleteBookingAsync(int id)
         {
-            (bool isValidated, Booking booking) = await ValidateDeleteBookingRequest(id);
-            if (!isValidated)
-                throw new HttpStatusCodeException((int)StatusCode.UnprocessableEntity, $"Cannot performed delete booking");
+            Booking booking = await ValidateDeleteBookingRequest(id);
             await _bookingRepository.DeleteAsync(booking);
         }
 
-        public async Task<(bool, CarModel)> ValidateRequestCreateBookingAsync(CreateBookingRequest request)
+        public async Task<CarModel> ValidateRequestCreateBookingAsync(CreateBookingRequest request)
         {
-            (bool icarModelValidated, CarModel carModel) = await ValidateCarModel(request.CarId.GetValueOrDefault(0));
-            if (!icarModelValidated)
-                throw new HttpStatusCodeException((int)StatusCode.NotFound, $"Selected Car Model with ID {request.CarId} not found");
-            bool isBookingSlotTimeValidated = await ValidateBookingSlotTime(request);
-            if (!isBookingSlotTimeValidated)
-                throw new HttpStatusCodeException((int)StatusCode.UnprocessableEntity, $"Selected time already booked.");
-
-            return (icarModelValidated && isBookingSlotTimeValidated, carModel);
+            CarModel carModel = await ValidateCarModel(request.CarId.GetValueOrDefault(0));
+            await ValidateBookingSlotTime(request);
+            return carModel;
         }
 
-        public async Task<(bool, CarModel)> ValidateCarModel(int carId)
+        public async Task<CarModel> ValidateCarModel(int carId)
         {
             var carModel = await _carModelRepository.GetByIdAsync(carId);
             if (carModel == null)
                 throw new HttpStatusCodeException((int)StatusCode.UnprocessableEntity, $"Selected Car Model with ID {carId} not found");
-            return (true, carModel);
+            return carModel;
         }
 
-        public async Task<bool> ValidateBookingSlotTime(CreateBookingRequest request)
+        public async Task ValidateBookingSlotTime(CreateBookingRequest request)
         {
             DateTime startDate = request.BookingDateTime.AddMinutes(-1 * ValidationConstants.BOOKING_MINUTE_INTERVAL);
             DateTime endDate = request.BookingDateTime.AddMinutes(ValidationConstants.BOOKING_MINUTE_INTERVAL);
@@ -183,34 +174,30 @@ namespace car_booking_service.Application.Services.Implementations
                                                                          request.CarId);
             if (existingBookings.Any())
                 throw new HttpStatusCodeException((int)StatusCode.UnprocessableEntity, $"There's Already Existing Booking for Selected Time.");
-
-            return true;
         }
 
         public async Task ValidateRequestUpdateBooking(UpdateBookingRequest request)
         {
             CreateBookingRequest req = request.Adapt<CreateBookingRequest>();
-            bool isBookingSlotTimeValidated = await ValidateBookingSlotTime(req);
-            if (!isBookingSlotTimeValidated)
-                throw new HttpStatusCodeException((int)StatusCode.UnprocessableEntity, $"Selected time already booked.");
+            await ValidateBookingSlotTime(req);
             await ValidateCarModel(request.CarId);
         }
 
-        public async Task<(bool, Booking)> ValidateBooking(int bookingId)
+        public async Task<Booking> ValidateBooking(int bookingId)
         {
             Booking? booking = await _bookingRepository.GetByIdAsync(bookingId);
             if (booking == null)
                 throw new HttpStatusCodeException((int)StatusCode.UnprocessableEntity, $"Booking not found for booking id {bookingId}");
 
-            return (true, booking);
+            return booking;
         }
 
-        public async Task<(bool, Booking)> ValidateDeleteBookingRequest(int bookingId)
+        public async Task<Booking> ValidateDeleteBookingRequest(int bookingId)
         {
-            (bool isBookingValidate, Booking booking) = await ValidateBooking(bookingId);
-            (bool isCarExist, CarModel carModel) = await ValidateCarModel(booking.BookingId);
+            Booking booking = await ValidateBooking(bookingId);
+            CarModel carModel = await ValidateCarModel(booking.BookingId);
 
-            return (isBookingValidate && isCarExist, booking);
+            return booking;
         }
     }
 }

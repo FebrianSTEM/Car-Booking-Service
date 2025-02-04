@@ -20,6 +20,7 @@ namespace car_booking_service.Test.Services
         private readonly Faker<Booking> _bookingFaker;
         private readonly Faker<CarModel> _carModelFaker;
         private readonly Faker<UpdateBookingRequest> _updateRequestFaker;
+        private readonly Faker<CreateBookingRequest> _createBookingRequestFaker;
 
         public BookingServiceTests()
         {
@@ -49,6 +50,13 @@ namespace car_booking_service.Test.Services
             .RuleFor(r => r.BookingId, f => f.Random.Number(1, 100))
             .RuleFor(r => r.CarId, f => f.Random.Number(1, 100))
             .RuleFor(r => r.BookingDateTime, f => f.Date.Future());
+
+            _createBookingRequestFaker = new Faker<CreateBookingRequest>()
+               .RuleFor(r => r.CarId, f => f.Random.Number(1, 100))
+               .RuleFor(r => r.BookingDateTime, f => f.Date.Future())
+               .RuleFor(r => r.CustomerName, f => f.Name.FullName())
+               .RuleFor(r => r.CustomerEmail, f => f.Internet.Email())
+               .RuleFor(r => r.CustomerPhone, f => f.Phone.PhoneNumber());
         }
 
         [Fact]
@@ -120,14 +128,14 @@ namespace car_booking_service.Test.Services
 
             A.CallTo(() => _fakeCarModelRepository.GetByIdAsync(request.CarId.Value))
                 .Returns(carModel);
-            A.CallTo(() => _fakeBookingRepository.GetListAsync(currentDate,              
-                                                                currentDate,             
-                                                                carModel.CarId,           
+            A.CallTo(() => _fakeBookingRepository.GetListAsync(currentDate,
+                                                                currentDate,
+                                                                carModel.CarId,
                                                                 A<string>._,
-                                                                A<string>._,            
-                                                                A<string>._,           
-                                                                A<string>._,           
-                                                                A<string>._,           
+                                                                A<string>._,
+                                                                A<string>._,
+                                                                A<string>._,
+                                                                A<string>._,
                                                                 A<int>._)).Returns(bookings);
 
             // Act
@@ -143,18 +151,42 @@ namespace car_booking_service.Test.Services
         }
 
         [Fact]
-        public async Task UpdateBookingAsync_WhenBookingNotFound_ShouldThrowHttpStatusCodeException()
+        public async Task UpdateBookingAsync_WithValidRequestAndDifferentSlot_ShouldUpdateBooking()
         {
             // Arrange
+            var existingBooking = _bookingFaker.Generate();
+            var carModel = _carModelFaker.Generate();
             var updateRequest = _updateRequestFaker.Generate();
+            updateRequest.CarId = carModel.CarId;
+            updateRequest.BookingId = existingBooking.BookingId;
 
             A.CallTo(() => _fakeBookingRepository.GetByIdAsync(updateRequest.BookingId))
-                .Returns((Booking)null);
+                .Returns(existingBooking);
+            A.CallTo(() => _fakeCarModelRepository.GetByIdAsync(updateRequest.CarId))
+                .Returns(carModel);
+            A.CallTo(() => _fakeBookingRepository.GetListAsync(
+                A<DateTime>._,
+                A<DateTime>._,
+                updateRequest.CarId,
+                A<string>._,
+                A<string>._,
+                A<string>._,
+                A<string>._,
+                A<string>._,
+                A<int>._))
+                .Returns(new List<Booking>());
 
-            // Act & Assert
-            await _bookingService.Invoking(s => s.UpdateBookingAsync(updateRequest))
-                .Should().ThrowAsync<HttpStatusCodeException>()
-                .WithMessage($"Booking not found for booking id {updateRequest.BookingId}");
+            // Act
+            var result = await _bookingService.UpdateBookingAsync(updateRequest);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.BookingId.Should().Be(updateRequest.BookingId);
+            result.CarModelBrand.Should().Be(carModel.Brand);
+            result.CarModelName.Should().Be(carModel.Model);
+
+            A.CallTo(() => _fakeBookingRepository.UpdateAsync(A<Booking>._))
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -178,35 +210,134 @@ namespace car_booking_service.Test.Services
         }
 
         [Fact]
-        public async Task ValidateBookingSlotTime_WithExistingBooking_ShouldThrowException()
+        public async Task ValidateBookingSlotTime_WithNoConflictingBookings_ShouldNotThrowException()
         {
             // Arrange
-            var bookingDateTime = DateTime.UtcNow.AddDays(1);
+            var bookingDateTime = DateTime.UtcNow.AddHours(24);
             var request = new CreateBookingRequest
             {
                 CarId = 1,
                 BookingDateTime = bookingDateTime
             };
 
-            DateTime expectedStartDate = bookingDateTime.AddMinutes(-1 * ValidationConstants.BOOKING_MINUTE_INTERVAL);
-            DateTime expectedEndDate = bookingDateTime.AddMinutes(ValidationConstants.BOOKING_MINUTE_INTERVAL);
+            var startDate = bookingDateTime.AddMinutes(-1 * ValidationConstants.BOOKING_MINUTE_INTERVAL);
+            var endDate = bookingDateTime.AddMinutes(ValidationConstants.BOOKING_MINUTE_INTERVAL);
 
-            // Create an existing booking that conflicts with the requested time
+            _ = A.CallTo(() => _fakeBookingRepository.GetListAsync(
+                    A<DateTime>.That.Matches(d => d == startDate),
+                    A<DateTime>.That.Matches(d => d == endDate),
+                    request.CarId,
+                    A<string>.That.Matches(s => s == ""),
+                    A<string>.That.Matches(s => s == ""),
+                    A<string>.That.Matches(s => s == ""),
+                    A<string>.That.Matches(s => s == ""),
+                    A<string>.That.Matches(s => s == ""),
+                    A<int?>.That.Matches(y => y == 0)))
+                .Returns(new List<Booking>());
+
+            // Act & Assert
+            await _bookingService.Invoking(s => s.ValidateBookingSlotTime(request))
+                .Should().NotThrowAsync();
+        }
+
+        [Fact]
+        public async Task ValidateBookingSlotTime_WithExactTimeConflict_ShouldThrowException()
+        {
+            // Arrange
+            var bookingDateTime = DateTime.UtcNow.AddHours(24);
+            var request = new CreateBookingRequest
+            {
+                CarId = 1,
+                BookingDateTime = bookingDateTime
+            };
+
             var existingBooking = _bookingFaker.Generate();
             existingBooking.CarId = request.CarId.Value;
             existingBooking.BookingDateTime = bookingDateTime;
 
-            // Mock the repository with all parameters
+            var startDate = bookingDateTime.AddMinutes(-1 * ValidationConstants.BOOKING_MINUTE_INTERVAL);
+            var endDate = bookingDateTime.AddMinutes(ValidationConstants.BOOKING_MINUTE_INTERVAL);
+
+            _ = A.CallTo(() => _fakeBookingRepository.GetListAsync(A<DateTime>.That.Matches(d => d == startDate),
+                                                                  A<DateTime>.That.Matches(d => d == endDate),
+                                                                  A<int?>.That.Matches(id => id == request.CarId),
+                                                                  A<string>.That.Matches(s => s == ""),
+                                                                  A<string>.That.Matches(s => s == ""),
+                                                                  A<string>.That.Matches(s => s == ""),
+                                                                  A<string>.That.Matches(s => s == ""),
+                                                                  A<string>.That.Matches(s => s == ""),
+                                                                  A<int?>.That.Matches(y => y == 0)
+                                                                 )).Returns(new List<Booking> { existingBooking });
+
+            // Act & Assert
+            await _bookingService.Invoking(s => s.ValidateBookingSlotTime(request))
+                .Should().ThrowAsync<HttpStatusCodeException>()
+                .WithMessage("There's Already Existing Booking for Selected Time.");
+        }
+
+        [Fact]
+        public async Task ValidateBookingSlotTime_WithBookingJustBeforeInterval_ShouldThrowException()
+        {
+            // Arrange
+            var bookingDateTime = DateTime.UtcNow.AddHours(24);
+            var request = new CreateBookingRequest
+            {
+                CarId = 1,
+                BookingDateTime = bookingDateTime
+            };
+
+            var existingBooking = _bookingFaker.Generate();
+            existingBooking.CarId = request.CarId.Value;
+            existingBooking.BookingDateTime = bookingDateTime.AddMinutes(-1 * (ValidationConstants.BOOKING_MINUTE_INTERVAL - 1));
+
+            var startDate = bookingDateTime.AddMinutes(-1 * ValidationConstants.BOOKING_MINUTE_INTERVAL);
+            var endDate = bookingDateTime.AddMinutes(ValidationConstants.BOOKING_MINUTE_INTERVAL);
+
+            A.CallTo(() => _fakeBookingRepository.GetListAsync(A<DateTime>.That.Matches(d => d == startDate),
+                                                               A<DateTime>.That.Matches(d => d == endDate),
+                                                               request.CarId,
+                                                               A<string>.That.Matches(s => s == ""),
+                                                               A<string>.That.Matches(s => s == ""),
+                                                               A<string>.That.Matches(s => s == ""),
+                                                               A<string>.That.Matches(s => s == ""),
+                                                               A<string>.That.Matches(s => s == ""),
+                                                               A<int?>.That.Matches(y => y == 0)))
+                                                 .Returns(new List<Booking> { existingBooking });
+
+            // Act & Assert
+            await _bookingService.Invoking(s => s.ValidateBookingSlotTime(request))
+                .Should().ThrowAsync<HttpStatusCodeException>()
+                .WithMessage("There's Already Existing Booking for Selected Time.");
+        }
+
+        [Fact]
+        public async Task ValidateBookingSlotTime_WithBookingJustAfterInterval_ShouldThrowException()
+        {
+            // Arrange
+            var bookingDateTime = DateTime.UtcNow.AddHours(24);
+            var request = new CreateBookingRequest
+            {
+                CarId = 1,
+                BookingDateTime = bookingDateTime
+            };
+
+            var existingBooking = _bookingFaker.Generate();
+            existingBooking.CarId = request.CarId.Value;
+            existingBooking.BookingDateTime = bookingDateTime.AddMinutes(ValidationConstants.BOOKING_MINUTE_INTERVAL - 1);
+
+            var startDate = bookingDateTime.AddMinutes(-1 * ValidationConstants.BOOKING_MINUTE_INTERVAL);
+            var endDate = bookingDateTime.AddMinutes(ValidationConstants.BOOKING_MINUTE_INTERVAL);
+
             A.CallTo(() => _fakeBookingRepository.GetListAsync(
-                    expectedStartDate,
-                    expectedEndDate,
-                    request.CarId,
-                    A<string>._,
-                    A<string>._,
-                    A<string>._,
-                    A<string>._,
-                    A<string>._,
-                    A<int>._))
+                A<DateTime>.That.Matches(d => d == startDate),
+                A<DateTime>.That.Matches(d => d == endDate),
+                request.CarId,
+                A<string>.That.Matches(s => s == ""),
+                A<string>.That.Matches(s => s == ""),
+                A<string>.That.Matches(s => s == ""),
+                A<string>.That.Matches(s => s == ""),
+                A<string>.That.Matches(s => s == ""),
+                A<int?>.That.Matches(y => y == 0)))
                 .Returns(new List<Booking> { existingBooking });
 
             // Act & Assert
@@ -216,50 +347,77 @@ namespace car_booking_service.Test.Services
         }
 
         [Fact]
-        public async Task ValidateBookingSlotTime_WithNoExistingBooking_ShouldReturnTrue()
+        public async Task ValidateBookingSlotTime_WithDifferentCarId_ShouldNotThrowException()
         {
             // Arrange
-            var bookingDateTime = DateTime.UtcNow.AddDays(1);
+            var bookingDateTime = DateTime.UtcNow.AddHours(24);
             var request = new CreateBookingRequest
             {
                 CarId = 1,
                 BookingDateTime = bookingDateTime
             };
 
-            DateTime expectedStartDate = bookingDateTime.AddMinutes(-1 * ValidationConstants.BOOKING_MINUTE_INTERVAL);
-            DateTime expectedEndDate = bookingDateTime.AddMinutes(ValidationConstants.BOOKING_MINUTE_INTERVAL);
+            var existingBooking = _bookingFaker.Generate();
+            existingBooking.CarId = request.CarId.Value + 1; // Different car ID
+            existingBooking.BookingDateTime = bookingDateTime;
 
-            // Mock the repository with all parameters
+            var startDate = bookingDateTime.AddMinutes(-1 * ValidationConstants.BOOKING_MINUTE_INTERVAL);
+            var endDate = bookingDateTime.AddMinutes(ValidationConstants.BOOKING_MINUTE_INTERVAL);
+
             A.CallTo(() => _fakeBookingRepository.GetListAsync(
-                    expectedStartDate,
-                    expectedEndDate,
-                    request.CarId,
-                    A<string>._,
-                    A<string>._,
-                    A<string>._,
-                    A<string>._,
-                    A<string>._,
-                    A<int>._))
-                .Returns(new List<Booking>());
+                A<DateTime>.That.Matches(d => d == startDate),
+                A<DateTime>.That.Matches(d => d == endDate),
+                request.CarId,
+                A<string>.That.Matches(s => s == ""),
+                A<string>.That.Matches(s => s == ""),
+                A<string>.That.Matches(s => s == ""),
+                A<string>.That.Matches(s => s == ""),
+                A<string>.That.Matches(s => s == ""),
+                A<int?>.That.Matches(y => y == 0)))
+                .Returns(new List<Booking>()); // Repository will return empty list for different car ID
 
-            // Act
-            var result = await _bookingService.ValidateBookingSlotTime(request);
+            // Act & Assert
+            await _bookingService.Invoking(s => s.ValidateBookingSlotTime(request))
+                .Should().NotThrowAsync();
+        }
 
-            // Assert
-            result.Should().BeTrue();
+        [Fact]
+        public async Task ValidateBookingSlotTime_WithMultipleConflictingBookings_ShouldThrowException()
+        {
+            // Arrange
+            var bookingDateTime = DateTime.UtcNow.AddHours(24);
+            var request = new CreateBookingRequest
+            {
+                CarId = 1,
+                BookingDateTime = bookingDateTime
+            };
 
-            // Verify the repository was called with correct parameters
-            A.CallTo(() => _fakeBookingRepository.GetListAsync(
-                    expectedStartDate,
-                    expectedEndDate,
-                    request.CarId,
-                    A<string>._,
-                    A<string>._,
-                    A<string>._,
-                    A<string>._,
-                    A<string>._,
-                    A<int>._))
-                .MustHaveHappenedOnceExactly();
+            var existingBookings = _bookingFaker.Generate(3);
+            foreach (var booking in existingBookings)
+            {
+                booking.CarId = request.CarId.Value;
+                booking.BookingDateTime = bookingDateTime;
+            }
+
+            var startDate = bookingDateTime.AddMinutes(-1 * ValidationConstants.BOOKING_MINUTE_INTERVAL);
+            var endDate = bookingDateTime.AddMinutes(ValidationConstants.BOOKING_MINUTE_INTERVAL);
+
+            _ = A.CallTo(() => _fakeBookingRepository.GetListAsync(
+                A<DateTime>.That.Matches(d => d == startDate),
+                A<DateTime>.That.Matches(d => d == endDate),
+                request.CarId,
+                A<string>.That.Matches(s => s == ""),
+                A<string>.That.Matches(s => s == ""),
+                A<string>.That.Matches(s => s == ""),
+                A<string>.That.Matches(s => s == ""),
+                A<string>.That.Matches(s => s == ""),
+                A<int?>.That.Matches(y => y == 0)))
+                .Returns(existingBookings);
+
+            // Act & Assert
+            await _bookingService.Invoking(s => s.ValidateBookingSlotTime(request))
+                .Should().ThrowAsync<HttpStatusCodeException>()
+                .WithMessage("There's Already Existing Booking for Selected Time.");
         }
 
         [Fact]
@@ -370,12 +528,11 @@ namespace car_booking_service.Test.Services
                 .Returns(booking);
 
             // Act
-            var (isValid, returnedBooking) = await _bookingService.ValidateBooking(booking.BookingId);
+            var result = await _bookingService.ValidateBooking(booking.BookingId);
 
             // Assert
-            isValid.Should().BeTrue();
-            returnedBooking.Should().NotBeNull();
-            returnedBooking.BookingId.Should().Be(booking.BookingId);
+            result.Should().NotBeNull();
+            result.BookingId.Should().Be(booking.BookingId);
         }
 
         [Fact]
@@ -405,12 +562,11 @@ namespace car_booking_service.Test.Services
                 .Returns(carModel);
 
             // Act
-            var (isValid, returnedBooking) = await _bookingService.ValidateDeleteBookingRequest(booking.BookingId);
+            var result = await _bookingService.ValidateDeleteBookingRequest(booking.BookingId);
 
             // Assert
-            isValid.Should().BeTrue();
-            returnedBooking.Should().NotBeNull();
-            returnedBooking.BookingId.Should().Be(booking.BookingId);
+            result.Should().NotBeNull();
+            result.BookingId.Should().Be(booking.BookingId);
         }
 
         [Fact]
@@ -441,6 +597,88 @@ namespace car_booking_service.Test.Services
             await _bookingService.Invoking(s => s.ValidateDeleteBookingRequest(booking.BookingId))
                 .Should().ThrowAsync<HttpStatusCodeException>()
                 .WithMessage($"Selected Car Model with ID {booking.BookingId} not found");
+        }
+
+        [Fact]
+        public async Task GetPaginatedAsync_ShouldReturnPaginatedResults()
+        {
+            // Arrange
+            var request = new GetPaginatedBookingsRequest
+            {
+                Page = 1,
+                PageSize = 10,
+                StartDate = DateTime.UtcNow,
+                EndDate = DateTime.UtcNow.AddDays(7)
+            };
+
+            var bookings = _bookingFaker.Generate(5);
+            int totalCount = 15;
+
+            A.CallTo(() => _fakeBookingRepository.GetPaginatedAsync(
+                request.Page,
+                request.PageSize,
+                request.StartDate,
+                request.EndDate,
+                request.CarId,
+                request.CustomerName,
+                request.CustomerPhone,
+                request.CustomerEmail,
+                request.CarBrand,
+                request.CarModel,
+                request.CarYear))
+                .Returns((bookings, totalCount));
+
+            // Act
+            var (result, count) = await _bookingService.GetPaginatedAsync(request);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().HaveCount(5);
+            count.Should().Be(15);
+        }
+
+        [Fact]
+        public async Task ValidateCarModel_WithInvalidCarId_ShouldThrowException()
+        {
+            // Arrange
+            int invalidCarId = 999;
+            A.CallTo(() => _fakeCarModelRepository.GetByIdAsync(invalidCarId))
+                .Returns((CarModel)null);
+
+            // Act & Assert
+            await _bookingService.Invoking(s => s.ValidateCarModel(invalidCarId))
+                .Should().ThrowAsync<HttpStatusCodeException>()
+                .WithMessage($"Selected Car Model with ID {invalidCarId} not found");
+        }
+
+        [Fact]
+        public async Task ValidateRequestCreateBookingAsync_WithValidRequest_ShouldReturnCarModel()
+        {
+            // Arrange
+            var request = _createBookingRequestFaker.Generate();
+            var carModel = _carModelFaker.Generate();
+            carModel.CarId = request.CarId.Value;
+
+            A.CallTo(() => _fakeCarModelRepository.GetByIdAsync(request.CarId.Value))
+                .Returns(carModel);
+            A.CallTo(() => _fakeBookingRepository.GetListAsync(
+                A<DateTime>._,
+                A<DateTime>._,
+                request.CarId,
+                A<string>._,
+                A<string>._,
+                A<string>._,
+                A<string>._,
+                A<string>._,
+                A<int>._))
+                .Returns(new List<Booking>());
+
+            // Act
+            var result = await _bookingService.ValidateRequestCreateBookingAsync(request);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.CarId.Should().Be(request.CarId.Value);
         }
     }
 }
