@@ -37,6 +37,8 @@ namespace car_booking_service.Test.Services
             _bookingFaker = new Faker<Booking>()
                 .RuleFor(b => b.BookingId, f => f.Random.Int(1, 100))
                 .RuleFor(b => b.CarId, f => f.Random.Int(1, 100))
+                .RuleFor(b => b.CarModelBrand, f => f.Vehicle.Manufacturer())
+                .RuleFor(b => b.CarModelName, f => f.Vehicle.Model())
                 .RuleFor(b => b.BookingDateTime, f => f.Date.Future())
                 .RuleFor(b => b.CustomerName, f => f.Name.FullName())
                 .RuleFor(b => b.CustomerEmail, f => f.Internet.Email())

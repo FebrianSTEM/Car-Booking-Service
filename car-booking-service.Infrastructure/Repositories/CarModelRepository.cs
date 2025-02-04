@@ -75,5 +75,14 @@ namespace car_booking_service.Infrastructure.Repositories
 
             return (result, totalData);
         }
+
+        public override async Task<CarModel> GetByIdAsync(int id)
+        {
+            var carModel = await _context.CarModels.AsNoTracking()
+                                         .Include(cm => cm.Bookings)
+                                         .FirstOrDefaultAsync(cm => cm.CarId == id);
+
+            return carModel;
+        }
     }
 }
